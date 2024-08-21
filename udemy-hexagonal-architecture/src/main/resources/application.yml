@@ -1,6 +1,9 @@
 spring:
   application:
     name: udemy-hexagonal-architecture
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/hexagonal
 
 address:
   client:
