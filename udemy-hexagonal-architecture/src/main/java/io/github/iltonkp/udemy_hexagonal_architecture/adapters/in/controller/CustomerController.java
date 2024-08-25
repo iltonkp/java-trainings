@@ -3,6 +3,7 @@ package io.github.iltonkp.udemy_hexagonal_architecture.adapters.in.controller;
 import io.github.iltonkp.udemy_hexagonal_architecture.adapters.in.controller.mapper.CustomerMapper;
 import io.github.iltonkp.udemy_hexagonal_architecture.adapters.in.controller.request.CustomerRequestDto;
 import io.github.iltonkp.udemy_hexagonal_architecture.adapters.in.controller.response.CustomerResponseDto;
+import io.github.iltonkp.udemy_hexagonal_architecture.application.ports.in.DeleteCustomerByIdInputPort;
 import io.github.iltonkp.udemy_hexagonal_architecture.application.ports.in.FindCustomerByIdInputPort;
 import io.github.iltonkp.udemy_hexagonal_architecture.application.ports.in.InsertCustomerInputPort;
 import io.github.iltonkp.udemy_hexagonal_architecture.application.ports.in.UpdateCustomerInputPort;
@@ -19,6 +20,7 @@ public class CustomerController {
     private InsertCustomerInputPort insertCustomerInputPort;
     private FindCustomerByIdInputPort findCustomerByIdInputPort;
     private UpdateCustomerInputPort updateCustomerInputPort;
+    private DeleteCustomerByIdInputPort deleteCustomerByIdInputPort;
     private CustomerMapper customerMapper;
 
     @PostMapping
@@ -48,6 +50,14 @@ public class CustomerController {
         customer.setId(id);
         updateCustomerInputPort.update(customer, customerRequest.zipCode());
         return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping(name = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable(name = "id") final String id){
+
+        deleteCustomerByIdInputPort.delete(id);
+        return ResponseEntity.noContent().build();
+
     }
 
 }
