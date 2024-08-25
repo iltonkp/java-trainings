@@ -2,8 +2,7 @@ package io.github.iltonkp.udemy_hexagonal_architecture.adapters.in.controller;
 
 import io.github.iltonkp.udemy_hexagonal_architecture.adapters.in.controller.mapper.CustomerMapper;
 import io.github.iltonkp.udemy_hexagonal_architecture.adapters.in.controller.request.CustomerRequestDto;
-import io.github.iltonkp.udemy_hexagonal_architecture.adapters.in.controller.response.CustomerResponse;
-import io.github.iltonkp.udemy_hexagonal_architecture.application.core.domain.Customer;
+import io.github.iltonkp.udemy_hexagonal_architecture.adapters.in.controller.response.CustomerResponseDto;
 import io.github.iltonkp.udemy_hexagonal_architecture.application.ports.in.FindCustomerByIdInputPort;
 import io.github.iltonkp.udemy_hexagonal_architecture.application.ports.in.InsertCustomerInputPort;
 import io.github.iltonkp.udemy_hexagonal_architecture.application.ports.in.UpdateCustomerInputPort;
@@ -31,10 +30,10 @@ public class CustomerController {
     }
 
     @GetMapping(name = "/{id}")
-    public ResponseEntity<CustomerResponse> findById(@PathVariable(name = "id") final String id){
+    public ResponseEntity<CustomerResponseDto> findById(@PathVariable(name = "id") final String id){
 
         var customer = findCustomerByIdInputPort.find(id);
-        var customerResponse = customerMapper.toCustomerResponse(customer);
+        var customerResponse = customerMapper.toCustomerResponseDto(customer);
         return ResponseEntity.ok().body(customerResponse);
 
     }
