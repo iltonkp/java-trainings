@@ -1,7 +1,7 @@
 package io.github.iltonkp.udemy_hexagonal_architecture.adapters.in.controller.mapper;
 
 import io.github.iltonkp.udemy_hexagonal_architecture.adapters.in.controller.request.CustomerRequestDto;
-import io.github.iltonkp.udemy_hexagonal_architecture.adapters.in.controller.response.CustomerResponse;
+import io.github.iltonkp.udemy_hexagonal_architecture.adapters.in.controller.response.CustomerResponseDto;
 import io.github.iltonkp.udemy_hexagonal_architecture.application.core.domain.Customer;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -16,5 +16,5 @@ public interface CustomerMapper {
     Customer toCustomer(CustomerRequestDto customerRequestDto);
 
 
-    CustomerResponse toCustomerResponse(Customer customer);
+    CustomerResponseDto toCustomerResponseDto(Customer customer);
 }
