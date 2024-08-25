@@ -6,6 +6,7 @@ import io.github.iltonkp.udemy_hexagonal_architecture.adapters.in.controller.res
 import io.github.iltonkp.udemy_hexagonal_architecture.application.core.domain.Customer;
 import io.github.iltonkp.udemy_hexagonal_architecture.application.ports.in.FindCustomerByIdInputPort;
 import io.github.iltonkp.udemy_hexagonal_architecture.application.ports.in.InsertCustomerInputPort;
+import io.github.iltonkp.udemy_hexagonal_architecture.application.ports.in.UpdateCustomerInputPort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ public class CustomerController {
 
     private InsertCustomerInputPort insertCustomerInputPort;
     private FindCustomerByIdInputPort findCustomerByIdInputPort;
+    private UpdateCustomerInputPort updateCustomerInputPort;
     private CustomerMapper customerMapper;
 
     @PostMapping
@@ -35,6 +37,18 @@ public class CustomerController {
         var customerResponse = customerMapper.toCustomerResponse(customer);
         return ResponseEntity.ok().body(customerResponse);
 
+    }
+
+    @PutMapping(name = "/{id}")
+    public ResponseEntity<Void> update(
+            @PathVariable(name = "id") final String id,
+            @Valid @RequestBody CustomerRequestDto customerRequest
+    ){
+
+        var customer = customerMapper.toCustomer(customerRequest);
+        customer.setId(id);
+        updateCustomerInputPort.update(customer, customerRequest.zipCode());
+        return ResponseEntity.noContent().build();
     }
 
 }
