@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ReceiveValidatedCpfConsumer {
 
-    private UpdateCustomerInputPort updateCustomerInputPort;
-    private CustomerMessageMapper customerMessageMapper;
+    private final UpdateCustomerInputPort updateCustomerInputPort;
+    private final CustomerMessageMapper customerMessageMapper;
 
     @KafkaListener(topics = "tp-cpf-validated", groupId = "iltonkp")
     public void receive( CustomerMessage customerMessage) {

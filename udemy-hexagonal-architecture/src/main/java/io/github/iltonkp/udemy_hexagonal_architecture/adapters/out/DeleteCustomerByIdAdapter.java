@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class DeleteCustomerByIdAdapter implements DeleteCustomerByIdOutputPort {
 
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
 
 
     @Override

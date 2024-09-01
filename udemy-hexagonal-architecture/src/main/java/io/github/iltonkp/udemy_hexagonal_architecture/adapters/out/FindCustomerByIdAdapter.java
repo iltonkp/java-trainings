@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@RequiredArgsConstructor
 @Component
+@RequiredArgsConstructor
 public class FindCustomerByIdAdapter implements FindCustomerByIdOutputPort {
 
-    private CustomerRepository customerRepository;
-    private CustomerEntityMapper customerEntityMapper;
+    private final CustomerRepository customerRepository;
+    private final CustomerEntityMapper customerEntityMapper;
 
 
     @Override

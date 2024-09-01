@@ -13,15 +13,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(name = "/api/v1/customer")
+@RequestMapping("/api/v1/customers")
 @RequiredArgsConstructor
 public class CustomerController {
 
-    private InsertCustomerInputPort insertCustomerInputPort;
-    private FindCustomerByIdInputPort findCustomerByIdInputPort;
-    private UpdateCustomerInputPort updateCustomerInputPort;
-    private DeleteCustomerByIdInputPort deleteCustomerByIdInputPort;
-    private CustomerMapper customerMapper;
+    private final InsertCustomerInputPort insertCustomerInputPort;
+    private final FindCustomerByIdInputPort findCustomerByIdInputPort;
+    private final UpdateCustomerInputPort updateCustomerInputPort;
+    private final DeleteCustomerByIdInputPort deleteCustomerByIdInputPort;
+    private final CustomerMapper customerMapper;
 
     @PostMapping
     public ResponseEntity<Void> insertCustomer(@Valid @RequestBody CustomerRequestDto customer) {
@@ -31,7 +31,7 @@ public class CustomerController {
 
     }
 
-    @GetMapping(name = "/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<CustomerResponseDto> findById(@PathVariable(name = "id") final String id){
 
         var customer = findCustomerByIdInputPort.find(id);
@@ -40,7 +40,7 @@ public class CustomerController {
 
     }
 
-    @PutMapping(name = "/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Void> update(
             @PathVariable(name = "id") final String id,
             @Valid @RequestBody CustomerRequestDto customerRequest
@@ -52,7 +52,7 @@ public class CustomerController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping(name = "/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable(name = "id") final String id){
 
         deleteCustomerByIdInputPort.delete(id);
