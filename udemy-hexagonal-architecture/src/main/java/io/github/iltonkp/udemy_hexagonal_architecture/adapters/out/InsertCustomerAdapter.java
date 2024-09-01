@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class InsertCustomerAdapter implements InsertCustomerOutputPort {
 
-    private CustomerRepository customerRepository;
-    private CustomerEntityMapper customerEntityMapper;
+    private final CustomerRepository customerRepository;
+    private final CustomerEntityMapper customerEntityMapper;
 
     @Override
     public void insert(Customer customer) {
