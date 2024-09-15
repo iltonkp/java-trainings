@@ -32,7 +32,7 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerResponseDto> findById(@PathVariable(name = "id") final String id){
+    public ResponseEntity<CustomerResponseDto> findById(@PathVariable("id") final String id){
 
         var customer = findCustomerByIdInputPort.find(id);
         var customerResponse = customerMapper.toCustomerResponseDto(customer);
@@ -53,7 +53,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable(name = "id") final String id){
+    public ResponseEntity<Void> delete(@PathVariable("id") final String id){
 
         deleteCustomerByIdInputPort.delete(id);
         return ResponseEntity.noContent().build();
